@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Campus Resource Sharing</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="container" style="max-width: 400px; margin-top: 5rem;">
+    <div class="form-section">
+        <h2>Login</h2>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div style="margin-bottom: 1rem; padding: 0.6rem; background-color: #fdecea; border-left: 4px solid #e74c3c; border-radius: 4px;">
+            {% for message in messages %}
+            <p style="color: #c0392b; font-size: 0.9rem;">{{ message }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        <form action="{{ url_for('login') }}" method="POST" style="grid-template-columns: 1fr;">
+            <input type="email" name="email" placeholder="College Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit" style="grid-column: span 1;">Login</button>
+        </form>
+
+        <p style="margin-top: 1rem; text-align: center; font-size: 0.95rem;">
+            Don't have an account? <a href="{{ url_for('register') }}" style="color: #2980b9; font-weight: bold;">Register</a>
+        </p>
+        <p style="margin-top: 0.5rem; text-align: center; font-size: 0.9rem;">
+            <a href="{{ url_for('home') }}" style="color: #555;">Back to Home</a>
+        </p>
+    </div>
+</div>
+</body>
+</html>

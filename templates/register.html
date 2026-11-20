@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register - Campus Marketplace</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="container" style="max-width: 420px; margin-top: 4rem;">
+    <div class="form-section">
+        <h2>Create Student Account</h2>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div style="margin-bottom: 1rem; padding: 0.7rem; background-color: #fdecea; border-left: 4px solid #e74c3c; border-radius: 4px;">
+            {% for message in messages %}
+            <p style="color: #c0392b; font-size: 0.9rem; font-weight: 500;">{{ message }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        <form action="{{ url_for('register') }}" method="POST" style="grid-template-columns: 1fr;">
+            <input type="text" name="username" placeholder="Full Name (min 3 letters)" minlength="3" required>
+            <input type="email" name="email" placeholder="Valid Email (e.g., kartik@gmail.com)" required>
+            <input type="tel" name="phone" placeholder="10-Digit Mobile Number" pattern="[6-9][0-9]{9}" maxlength="10" title="Enter exact 10-digit Indian mobile number" required>
+            <input type="password" name="password" placeholder="Password (min 6 characters)" minlength="6" required>
+            <button type="submit" style="grid-column: span 1;">Register</button>
+        </form>
+
+        <p style="margin-top: 1rem; text-align: center; font-size: 0.95rem;">
+            Already have an account? <a href="{{ url_for('login') }}" style="color: #2980b9; font-weight: bold;">Login</a>
+        </p>
+        <p style="margin-top: 0.5rem; text-align: center; font-size: 0.9rem;">
+            <a href="{{ url_for('home') }}" style="color: #555;">Back to Home</a>
+        </p>
+    </div>
+</div>
+</body>
+</html>
