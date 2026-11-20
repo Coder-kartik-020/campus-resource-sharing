@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Campus Marketplace{% endblock %}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<script defer src="{{ url_for('static', filename='js/script.js') }}"></script>
+</head>
+<body>
+<header class="topbar"><a class="brand" href="{{ url_for('home') }}"><span class="brand-mark">🎓</span><span>Campus<span class="brand-blue">Market</span></span></a><div class="top-actions"><a href="{{ url_for('chats') }}">💬</a>{% if user %}<a href="{{ url_for('account') }}" class="avatar">{{ user.name[0]|upper }}</a>{% else %}<a class="btn small" href="{{ url_for('login') }}">Login</a>{% endif %}</div></header>
+<main class="page">
+{% with messages=get_flashed_messages() %}{% if messages %}<div class="flash-wrap">{% for message in messages %}<div class="flash">{{ message }}</div>{% endfor %}</div>{% endif %}{% endwith %}
+{% block content %}{% endblock %}
+</main>
+<nav class="bottom-nav"><a href="{{ url_for('home') }}" class="{% if request.endpoint=='home' %}active{% endif %}"><span>⌂</span>Home</a><a href="{{ url_for('chats') }}" class="{% if request.endpoint in ['chats','chat_room'] %}active{% endif %}"><span>▤</span>Chats</a><a href="{{ url_for('sell') }}" class="sell-nav"><span>＋</span>Sell</a><a href="{{ url_for('my_ads') }}" class="{% if request.endpoint=='my_ads' %}active{% endif %}"><span>▣</span>My Ads</a><a href="{{ url_for('account') }}" class="{% if request.endpoint=='account' %}active{% endif %}"><span>♙</span>Account</a></nav>
+</body></html>
